@@ -1,0 +1,17 @@
+{{>layouts/header}}
+
+<!-- 어디에 보낼지는 action에서 정함 -->
+<!-- 어떻게 보낼지는 method에서 정함 -->
+
+<form class="container" action="/articles/create" method="post">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title">    <!-- DTO의 title 필드와 연결 -->
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea class="form-control" id="content" name="content" rows="3"></textarea>     <!-- DTO의 content 필드와 연결 -->
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+{{>layouts/footer}}
