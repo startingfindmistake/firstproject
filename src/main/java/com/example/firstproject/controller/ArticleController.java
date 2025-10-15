@@ -47,13 +47,15 @@ public class ArticleController {
 
     
     @GetMapping("/articles/{id}") // 데이터 조회 요청 접수
-    public String show(@PathVariable Long id) {     // 매개변수로 id 받아 오기
+    public String show(@PathVariable Long id, Model model) {     // 매개변수로 id 받아 오기
         log.info("id= " + id);  // id를 잘 받았는지 확인하는 로그 찍기
 
         // 1. id를 조회해 데이터 가져오기
         Article articleEntity = articleRepository.findById(id).orElse(null);
         // .orElse 설명: id 값으로 데이터를 찾을 때 해당 id 값이 없으면 null을 반환해라
+
         // 2. 모델에 데이터 등록하기
+        model.addAttribute("article", articleEntity);
         // 3. 뷰 페이지 반환하기
 
 
