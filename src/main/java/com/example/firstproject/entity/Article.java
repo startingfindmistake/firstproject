@@ -21,6 +21,12 @@ public class Article {
     @Column     // content 필드 선언, DB 테이블의 content 열과 연결됨
     private String content;
 
+        public Long getId() {   // 주의! 데이터 타입을 String -> Long 변경해야 함
+        return id;
+    }
+
+    
+
 
 
     /* 롬복으로 엔티티 리팩터링하기

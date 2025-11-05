@@ -42,7 +42,9 @@ public class ArticleController {
         Article saved = articleRepository.save(article);       // article 엔티티를 저장해 saved 객체에 반환
         log.info(saved.toString());     // 아래 주석한줄 내용을 대체하는 로깅 코드 추가
         //System.out.println(saved.toString());       // article이 DB에 잘 저장되는지 확인 출력
-        return "";
+
+        // id 값을 가져오기 위해 saved 객체 이용
+        return "redirect:/articles/" + saved.getId(); // 리다이렉트를 작성할 위치
     }
 
 
