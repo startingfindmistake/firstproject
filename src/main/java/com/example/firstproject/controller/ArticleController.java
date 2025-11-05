@@ -1,9 +1,10 @@
 package com.example.firstproject.controller;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import com.example.firstproject.dto.ArticleForm;
 import com.example.firstproject.entity.Article; //Article 클래스 임포트 확인
 import com.example.firstproject.repository.ArticleRepository;
 
-import ch.qos.logback.core.model.Model;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j      // 데이터를 확인하는 로깅 기능을 위한 어노테이션 추가
@@ -57,10 +58,27 @@ public class ArticleController {
         // 2. 모델에 데이터 등록하기
         model.addAttribute("article", articleEntity);
         // 3. 뷰 페이지 반환하기
+        return "articles/show";
 
 
-        return "";
-
+        
     //@PathVariable은 URL 요청으로 들어온 전달값을 컨트롤러의 매개변수로 가져오는 어노테이션
+    }
+
+    @GetMapping("/articles")
+    public String index(Model model) {      // model 객체 받아 오기
+        // 1. DB에서 모든 Article 데이터 가져오기
+        // 2. Article 묶음을 모델에 등록하기
+        // 3. 사용자에게 보열 줄 뷰 페이지 설정하기
+
+
+        // 1. 모든 데이터 가져오기
+        // - DB에서 데이터를 가져오려면 리파지터리가 필요하다
+        List<Article> articleEntityList = articleRepository.findAll();
+        // 2. 모델에 데이터 등록하기
+        model.addAttribute("articleList", articleEntityList);       // articleEntityList 등록
+        // 3. 뷰 페이지 설정하기
+        // article 디렉터리 안에 index.mustache 파일이 뷰 페이지로 설정될수 있도록 return문
+        return "articles/index";
     }
 }
